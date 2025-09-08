@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>⚠️ SYSTEM BREACH ⚠️</title>
+  <link rel="icon" href="hacker-virus.png" type="image/x-icon"/>
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Audiowide', sans-serif;
+      background: black;
+      color: #ff0000;
+      overflow: hidden;
+      cursor: crosshair;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .red-alert {
+      text-align: center;
+      padding: 2rem;
+      background-color: rgba(255, 0, 0, 0.2);
+      animation: pulseRed 1s infinite alternate;
+    }
+
+    .red-alert .large {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    #scambleContainer {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    #scambleText {
+      font-size: 1.4rem;
+      text-shadow: 0 0 5px red;
+    }
+
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+    }
+
+    #infos {
+      padding: 2rem;
+      animation: flicker 3s infinite;
+    }
+
+    .glitch {
+      position: relative;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      right: 0;
+      opacity: 0.7;
+    }
+
+    .glitch::before {
+      top: -2px;
+      left: 2px;
+      color: lime;
+      animation: glitch 1s infinite linear alternate-reverse;
+    }
+
+    .glitch::after {
+      top: 2px;
+      left: -2px;
+      color: blue;
+      animation: glitch 0.8s infinite linear alternate-reverse;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(-2px, -2px); }
+      60% { transform: translate(2px, 2px); }
+      80% { transform: translate(2px, -2px); }
+      100% { transform: translate(0); }
+    }
+
+    @keyframes pulseRed {
+      from { background-color: rgba(255, 0, 0, 0.1); }
+      to { background-color: rgba(255, 0, 0, 0.4); }
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+      60% { opacity: 0.6; }
+      70% { opacity: 0.9; }
+    }
+
+    /* 👁️ Eye Cursor */
+    #eye {
+      position: fixed;
+      font-size: 2rem;
+      z-index: 9999;
+      pointer-events: none;
+    }
+
+    /* 🪳 Bug crawl */
+    .bug {
+      position: fixed;
+      font-size: 24px;
+      z-index: 9999;
+      animation: bugCrawl 8s linear forwards;
+    }
+
+    @keyframes bugCrawl {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(100vw); }
+    }
+
+    /* 😱 Ghost jump scare */
+    #ghostFace {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 99999;
+      background: black;
+    }
+
+    /* 🖥️ Screen flicker effect */
+    @keyframes screenFlicker {
+      0%, 100% { opacity: 1; }
+      10%, 90% { opacity: 0.9; }
+      20%, 80% { opacity: 0.6; }
+      30%, 70% { opacity: 0.4; }
+      50% { opacity: 0.2; }
+    }
+
+    body.flicker {
+      animation: screenFlicker 0.15s infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="creepySound" autoplay loop>
+    <source src="https://www.myinstants.com/media/sounds/creepy-wind.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Whisper Effect -->
+  <audio id="whisper1" src="https://www.myinstants.com/media/sounds/ghostly_whisper.mp3" preload="auto"></audio>
+
+  <!-- Matrix Canvas -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- Ghost Jump Scare -->
+  <img id="ghostFace" src="https://i.imgur.com/9qkGdJr.jpg" alt="Ghost">
+
+  <!-- Eye 👁️ -->
+  <div id="eye">👁️</div>
+
+  <!-- Breach Alert -->
+  <div class="red-alert glitch" data-text="🚨 BREACHED 🚨">
+    <div class="redAlert">
+      <span class="small">🖥️ SYSTEM STATUS:</span>
+      <span class="large">🚨 BREACHED 🚨</span>
+      <span class="small" id="countdown">⏳ Time Left: 00:59:43</span>
+    </div>
+  </div>
+
+  <!-- Hack Message -->
+  <div id="scambleContainer" class="glitch" data-text="⚠️ Your device has been seized. We are in control now.">
+    <img src="hacker-virus.png" alt="💻 Hacked screen virus" width="120"><br>
+    <span id="scambleText">
+      ⚠️ Your device has been seized. We are in control now.<br>
+      💣 <strong>Freedom comes at a cost.</strong><br>
+      🔗 <a href="https://geektyper.com/" target="_blank">Click here to negotiate 💼</a><br>
+      <a href="https://www.doge4ever.com/" target="_blank">🖥️ Enter the Dogeverse</a><br>
+      <a href="https://www.urbandictionary.com/define.php?term=404" target="_blank">🚫 404 Definitions</a><br>
+      <a href="https://www.mousebreaker.com/" target="_blank">🎮 Play useless games</a><br>
+      <a href="https://www.theuselessweb.com/" target="_blank">🔴 Take me somewhere random</a><br>
+      <a href="https://www.ascii-art.de/" target="_blank">💻 ASCII Art Generator</a><br>
+      <a href="https://www.patorjk.com/software/taag/" target="_blank">📡 Text to ASCII Art</a><br>
+      <a href="https://www.yugiohcardmaker.net/" target="_blank">🃏 Make your own Yu-Gi-Oh! Card</a><br>
+    </span>
+  </div>
+
+  <!-- Info Section -->
+  <div id="infos">
+    <h2>🧨 What Just Happened?</h2>
+    <p>
+      The digital walls you trusted have fallen. We've bypassed every security protocol. <br>🗃️ Your files, your data, your privacy—
+      <em>gone</em>. 🕶️
+    </p>
+    <h2>🛠️ But All Is Not Lost...</h2>
+    <p>
+      There is still hope. You have one last chance to restore balance. 🧬<br>
+      Follow our instructions, and you might just earn your system back. 💾
+    </p>
+    <div id="typedText" style="text-align:center; font-size:1.2rem; color:crimson;"></div>
+  </div>
+
+  <script>
+    // Fullscreen
+    window.addEventListener('load', () => {
+      document.documentElement.requestFullscreen().catch(() => {});
+      document.getElementById("creepySound").play().catch(() => {});
+    });
+
+    // Matrix Rain
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    let matrixChars = "01".split("");
+    let fontSize = 16;
+    let columns = canvas.width / fontSize;
+    let drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#0F0";
+      ctx.font = fontSize + "px monospace";
+      for (let i = 0; i < drops.length; i++) {
+        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+    setInterval(drawMatrix, 33);
+
+    // Flicker screen
+    setInterval(() => {
+      document.body.classList.toggle('flicker');
+    }, Math.random() * 4000 + 3000);
+
+    // Eye follows cursor
+    document.addEventListener("mousemove", (e) => {
+      const eye = document.getElementById("eye");
+      eye.style.left = e.pageX + 10 + "px";
+      eye.style.top = e.pageY + 10 + "px";
+    });
+
+    // Bug crawl every 15 sec
+    setInterval(() => {
+      const bug = document.createElement("div");
+      bug.className = "bug";
+      bug.style.top = Math.random() * window.innerHeight + "px";
+      bug.textContent = "🪳";
+      document.body.appendChild(bug);
+      setTimeout(() => bug.remove(), 10000);
+    }, 15000);
+
+    // Play whisper audio
+    setInterval(() => {
+      const whisper = document.getElementById("whisper1");
+      if (whisper) whisper.play().catch(() => {});
+    }, 25000);
+
+    // Typing effect
+    function typeEffect(el, text, delay = 60) {
+      let i = 0;
+      const interval = setInterval(() => {
+        el.textContent += text[i];
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, delay);
+    }
+    const scaryMsg = "🔓 Access to your soul has been granted...";
+    const target = document.getElementById("typedText");
+    setTimeout(() => typeEffect(target, scaryMsg), 10000);
+
+    // Jump scare every 60 seconds
+    setInterval(() => {
+      const ghost = document.getElementById("ghostFace");
+      ghost.style.display = "block";
+      setTimeout(() => ghost.style.display = "none", 200);
+    }, 60000);
+
+    // Fake alerts
+    const fakePopups = [
+      "🛑 Unauthorized access detected!",
+      "📂 System files being deleted...",
+      "🔐 Encryption key compromised!",
+      "🧠 Neural trace activated.",
+      "🕷️ Malware injected successfully.",
+      "⚠️ Your IP has been exposed!",
+      "💥 Self-destruct sequence initiated...",
+      "📡 Connecting to darknet node...",
+      "🚫 Antivirus has been neutralized!"
+    ];
+    setInterval(() => {
+      const message = fakePopups[Math.floor(Math.random() * fakePopups.length)];
+      alert(message);
+    }, 12000);
+
+    // Warn on exit
+    window.addEventListener('beforeunload', (e) => {
+      const message = "⚠️ Are you sure you want to close this file? You'll face consequences.";
+      e.preventDefault();
+      e.returnValue = message;
+      return message;
+    });
+  </script>
+</body>
+</html>
