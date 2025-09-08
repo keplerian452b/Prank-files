@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loading...</title>
+  <style>
+    :root {
+      --bg-dark: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      --bg-light: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      --text-dark: #ffffff;
+      --text-light: #222222;
+      --highlight-dark: #00f0ff;
+      --highlight-light: #00bcd4;
+    }
+
+    [data-theme="dark"] {
+      --bg: var(--bg-dark);
+      --text: var(--text-dark);
+      --highlight: var(--highlight-dark);
+    }
+
+    [data-theme="light"] {
+      --bg: var(--bg-light);
+      --text: var(--text-light);
+      --highlight: var(--highlight-light);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeInPage 1.5s ease forwards;
+    }
+
+    @keyframes fadeInPage {
+      to { opacity: 1; }
+    }
+
+    .console-screen {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.95rem;
+      color: #00ffcc;
+      background: black;
+      padding: 30px;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+
+    .console-line {
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+      fill: var(--highlight);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .logo {
+      font-size: 1.8em;
+      font-weight: 600;
+      letter-spacing: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid var(--text);
+      width: 0;
+      animation: typing 2.5s steps(20, end) forwards, blink 0.8s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 130px; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .spinner {
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      border-top: 6px solid var(--highlight);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-top: 30px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      font-size: 1.1em;
+      color: var(--text);
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px var(--highlight); }
+      100% { text-shadow: 0 0 15px var(--highlight); }
+    }
+
+    .progress-bar {
+      width: 280px;
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      margin-top: 25px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--highlight), #00ffe5);
+      position: absolute;
+      left: 0;
+      top: 0;
+      animation: fillForward 2s ease-in-out infinite;
+    }
+
+    @keyframes fillForward {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    .fun-msg {
+      margin-top: 30px;
+      font-size: 0.95em;
+      font-style: italic;
+      color: #aaa;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .fun-msg.show {
+      opacity: 1;
+    }
+
+    #themeToggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      color: var(--text);
+      border: 2px solid var(--highlight);
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      z-index: 5;
+      transition: background 0.3s;
+    }
+
+    #themeToggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div id="console" class="console-screen">
+    <div class="console-line">> Booting system...</div>
+    <div class="console-line">> Connecting to secure environment...</div>
+    <div class="console-line">> Decrypting core modules...</div>
+    <div class="console-line">> Initializing visuals...</div>
+    <div class="console-line">> Done.</div>
+  </div>
+
+  <button id="themeToggle">Toggle Theme</button>
+
+  <svg class="logo-icon" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="5" fill="none"/>
+    <path d="M30 50 L50 30 L70 50 L50 70 Z" fill="currentColor" opacity="0.7"/>
+  </svg>
+
+  <div class="logo">Loading...</div>
+  <div class="spinner"></div>
+  <div class="loading-text">Please wait...</div>
+  <div class="progress-bar">
+    <div class="progress-fill"></div>
+  </div>
+  <div class="fun-msg" id="funMsg">Almost there...</div>
+
+  <script>
+    const funMsg = document.getElementById("funMsg");
+    const messages = [
+      "Loading...", "Calibrating visuals...",
+      "Breathing digital life...", "Unfolding UI...",
+      "Preparing modules...", "Almost there..."
+    ];
+
+    function showNewMessage() {
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      funMsg.textContent = msg;
+      funMsg.classList.remove("show");
+      void funMsg.offsetWidth;
+      funMsg.classList.add("show");
+    }
+
+    showNewMessage();
+    setInterval(showNewMessage, 3000);
+
+    // Console Boot Sequence
+    const lines = document.querySelectorAll(".console-line");
+    const consoleScreen = document.getElementById("console");
+
+    lines.forEach((line, i) => {
+      setTimeout(() => {
+        line.style.opacity = 1;
+        if (i === lines.length - 1) {
+          setTimeout(() => {
+            consoleScreen.style.display = "none";
+          }, 1000);
+        }
+      }, i * 1000);
+    });
+
+    // Theme Toggle
+    const themeToggle = document.getElementById("themeToggle");
+    themeToggle.addEventListener("click", () => {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      html.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+    });
+  </script>
+</body>
+</html>
